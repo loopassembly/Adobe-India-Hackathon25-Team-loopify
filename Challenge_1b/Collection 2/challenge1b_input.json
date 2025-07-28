@@ -1,0 +1,75 @@
+{
+    "challenge_info": {
+        "challenge_id": "round_1b_003",
+        "test_case_name": "create_manageable_forms",
+        "description": "Creating manageable forms"
+    },
+    "documents": [
+        {
+            "filename": "Learn Acrobat - Create and Convert_1.pdf",
+            "title": "Learn Acrobat - Create and Convert_1"
+        },
+        {
+            "filename": "Learn Acrobat - Create and Convert_2.pdf",
+            "title": "Learn Acrobat - Create and Convert_2"
+        },
+        {
+            "filename": "Learn Acrobat - Edit_1.pdf",
+            "title": "Learn Acrobat - Edit_1"
+        },
+        {
+            "filename": "Learn Acrobat - Edit_2.pdf",
+            "title": "Learn Acrobat - Edit_2"
+        },
+        {
+            "filename": "Learn Acrobat - Export_1.pdf",
+            "title": "Learn Acrobat - Export_1"
+        },
+        {
+            "filename": "Learn Acrobat - Export_2.pdf",
+            "title": "Learn Acrobat - Export_2"
+        },
+        {
+            "filename": "Learn Acrobat - Fill and Sign.pdf",
+            "title": "Learn Acrobat - Fill and Sign"
+        },
+        {
+            "filename": "Learn Acrobat - Generative AI_1.pdf",
+            "title": "Learn Acrobat - Generative AI_1"
+        },
+        {
+            "filename": "Learn Acrobat - Generative AI_2.pdf",
+            "title": "Learn Acrobat - Generative AI_2"
+        },
+        {
+            "filename": "Learn Acrobat - Request e-signatures_1.pdf",
+            "title": "Learn Acrobat - Request e-signatures_1"
+        },
+        {
+            "filename": "Learn Acrobat - Request e-signatures_2.pdf",
+            "title": "Learn Acrobat - Request e-signatures_2"
+        },
+        {
+            "filename": "Learn Acrobat - Share_1.pdf",
+            "title": "Learn Acrobat - Share_1"
+        },
+        {
+            "filename": "Learn Acrobat - Share_2.pdf",
+            "title": "Learn Acrobat - Share_2"
+        },
+        {
+            "filename": "Test Your Acrobat Exporting Skills.pdf",
+            "title": "Test Your Acrobat Exporting Skills"
+        },
+        {
+            "filename": "The Ultimate PDF Sharing Checklist.pdf",
+            "title": "The Ultimate PDF Sharing Checklist"
+        }
+    ],
+    "persona": {
+        "role": "HR professional"
+    },
+    "job_to_be_done": {
+        "task": "Create and manage fillable forms for onboarding and compliance."
+    }
+}

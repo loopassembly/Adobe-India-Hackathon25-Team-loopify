@@ -1,0 +1,83 @@
+{
+    "metadata": {
+        "input_documents": [
+            "Learn Acrobat - Create and Convert_1.pdf",
+            "Learn Acrobat - Create and Convert_2.pdf",
+            "Learn Acrobat - Edit_1.pdf",
+            "Learn Acrobat - Edit_2.pdf",
+            "Learn Acrobat - Export_1.pdf",
+            "Learn Acrobat - Export_2.pdf",
+            "Learn Acrobat - Fill and Sign.pdf",
+            "Learn Acrobat - Generative AI_1.pdf",
+            "Learn Acrobat - Generative AI_2.pdf",
+            "Learn Acrobat - Request e-signatures_1.pdf",
+            "Learn Acrobat - Request e-signatures_2.pdf",
+            "Learn Acrobat - Share_1.pdf",
+            "Learn Acrobat - Share_2.pdf",
+            "Test Your Acrobat Exporting Skills.pdf",
+            "The Ultimate PDF Sharing Checklist.pdf"
+        ],
+        "persona": "HR professional",
+        "job_to_be_done": "Create and manage fillable forms for onboarding and compliance.",
+        "processing_timestamp": "2025-07-10T15:34:33.350102"
+    },
+    "extracted_sections": [
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "section_title": "Change flat forms to fillable (Acrobat Pro)",
+            "importance_rank": 1,
+            "page_number": 12
+        },
+        {
+            "document": "Learn Acrobat - Create and Convert_1.pdf",
+            "section_title": "Create multiple PDFs from multiple files",
+            "importance_rank": 2,
+            "page_number": 12
+        },
+        {
+            "document": "Learn Acrobat - Create and Convert_1.pdf",
+            "section_title": "Convert clipboard content to PDF",
+            "importance_rank": 3,
+            "page_number": 10
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "section_title": "Fill and sign PDF forms",
+            "importance_rank": 4,
+            "page_number": 2
+        },
+        {
+            "document": "Learn Acrobat - Request e-signatures_1.pdf",
+            "section_title": "Send a document to get signatures from others",
+            "importance_rank": 5,
+            "page_number": 2
+        }
+    ],
+    "subsection_analysis": [
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "To create an interactive form, use the Prepare Forms tool. See Create a form from an existing document.",
+            "page_number": 12
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "To enable the Fill & Sign tools, from the hamburger menu (File menu in macOS) choose Save As Other > Acrobat Reader Extended PDF > Enable More Tools (includes Form Fill-in & Save). The tools are enabled for the current form only. When you create a different form, redo this task to enable Acrobat Reader users to use the tools.",
+            "page_number": 12
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "Interactive forms contain fields that you can select and fill in. Flat forms do not have interactive fields. The Fill & Sign tool automatically detects the form fields like text fields, comb fields, checkboxes, and radio buttons. You can manually add text and other symbols anywhere on the form using the Fill & Sign tool if required.",
+            "page_number": 2
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "To fill text fields: From the left panel, select Fill in form fields, and then select the field where you want to add text. It displays a text field along with a toolbar. Select the text field again and enter your text. To reposition the text box to align it with the text field, select the textbox and hover over it. Once you see a plus icon with arrows, move the textbox to the desired position. To edit the text, select the text box. Once you see the cursor and keypad, edit the text and then click elsewhere to enter. To change the text size, select A or A as required.",
+            "page_number": 2
+        },
+        {
+            "document": "Learn Acrobat - Request e-signatures_1.pdf",
+            "refined_text": "Open the PDF form in Acrobat or Acrobat Reader, and then choose All tools > Request E-signatures. Alternatively, you can select Sign from the top toolbar. The Request Signatures window is displayed. In the recipients field, add recipient email addresses in the order you want the document to be signed. The Mail and Message fields are just like the ones you use for sending an email and appear to your recipients in the same way. Change the default text in the Subject & Message area as appropriate.",
+            "page_number": 2
+        }
+    ]
+}

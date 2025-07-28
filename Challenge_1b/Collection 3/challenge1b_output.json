@@ -1,0 +1,77 @@
+{
+    "metadata": {
+        "input_documents": [
+            "Breakfast Ideas.pdf",
+            "Dinner Ideas - Mains_1.pdf",
+            "Dinner Ideas - Mains_2.pdf",
+            "Dinner Ideas - Mains_3.pdf",
+            "Dinner Ideas - Sides_1.pdf",
+            "Dinner Ideas - Sides_2.pdf",
+            "Dinner Ideas - Sides_3.pdf",
+            "Dinner Ideas - Sides_4.pdf",
+            "Lunch Ideas.pdf"
+        ],
+        "persona": "Food Contractor",
+        "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items.",
+        "processing_timestamp": "2025-07-10T15:40:14.642503"
+    },
+    "extracted_sections": [
+        {
+            "document": "Dinner Ideas - Sides_2.pdf",
+            "section_title": "Falafel",
+            "importance_rank": 1,
+            "page_number": 7
+        },
+        {
+            "document": "Dinner Ideas - Sides_3.pdf",
+            "section_title": "Ratatouille",
+            "importance_rank": 2,
+            "page_number": 8
+        },
+        {
+            "document": "Dinner Ideas - Sides_1.pdf",
+            "section_title": "Baba Ganoush",
+            "importance_rank": 3,
+            "page_number": 4
+        },
+        {
+            "document": "Lunch Ideas.pdf",
+            "section_title": "Veggie Sushi Rolls",
+            "importance_rank": 4,
+            "page_number": 11
+        },
+        {
+            "document": "Dinner Ideas - Mains_2.pdf",
+            "section_title": "Vegetable Lasagna",
+            "importance_rank": 5,
+            "page_number": 9
+        }
+    ],
+    "subsection_analysis": [
+        {
+            "document": "Dinner Ideas - Sides_2.pdf",
+            "refined_text": "Escalivada Ingredients: 2 eggplants, 2 bell peppers, 2 tomatoes, 1 small onion, 1/4 cup olive oil, 1 teaspoon salt. Instructions: Preheat oven to 400°F (200°C). Roast eggplants, bell peppers, tomatoes, and onion until tender. Peel and slice vegetables. Arrange on a plate and drizzle with olive oil. Sprinkle with salt and serve warm or at room temperature.",
+            "page_number": 7
+        },
+        {
+            "document": "Dinner Ideas - Sides_2.pdf",
+            "refined_text": "Falafel Ingredients: 1 can chickpeas, 1 small onion, 2 cloves garlic, 1/4 cup parsley, 1 teaspoon cumin, 1 teaspoon coriander, 1 teaspoon salt, 1/4 cup flour, oil for frying. Instructions: Drain and rinse chickpeas. Blend chickpeas, diced onion, minced garlic, chopped parsley, cumin, coriander, and salt in a food processor. Add flour and mix until combined. Form mixture into balls and fry in hot oil until golden.",
+            "page_number": 7
+        },
+        {
+            "document": "Dinner Ideas - Sides_1.pdf",
+            "refined_text": "Baba Ganoush Ingredients: 2 eggplants, 1/4 cup tahini, 1/4 cup lemon juice, 2 cloves garlic, 1/4 cup olive oil, 1 teaspoon salt. Instructions: Roast eggplants until soft, then peel and mash. Blend mashed eggplant, tahini, lemon juice, minced garlic, and salt in a food processor. Slowly add olive oil while blending until smooth. Serve with a drizzle of olive oil.",
+            "page_number": 4
+        },
+        {
+            "document": "Lunch Ideas.pdf",
+            "refined_text": "Veggie Sushi Rolls Ingredients: 1 cup cooked sushi rice, 1/2 cucumber (julienned), 1/2 avocado (sliced), 1/4 cup carrot (julienned), 2 sheets nori (seaweed), soy sauce for dipping. Instructions: Lay a sheet of nori on a bamboo sushi mat. Spread a thin layer of sushi rice over the nori, leaving a 1-inch border at the top. Arrange the cucumber, avocado, and carrot in a line along the bottom edge of the rice. Roll the nori tightly using the bamboo mat. Slice into bite-sized pieces and serve with soy sauce.",
+            "page_number": 11
+        },
+        {
+            "document": "Dinner Ideas - Sides_3.pdf",
+            "refined_text": "Macaroni and Cheese Ingredients: 2 cups elbow macaroni, 2 cups milk, 2 tablespoons butter, 2 tablespoons flour, 2 cups shredded cheddar cheese, 1 teaspoon salt, 1/2 teaspoon pepper. Instructions: Cook macaroni according to package instructions, then drain. Melt butter in a saucepan, stir in flour to make a roux. Gradually add milk, stirring constantly until thickened. Add cheese, salt, and pepper, stir until melted. Combine cheese sauce with macaroni. Serve warm.",
+            "page_number": 8
+        }
+    ]
+}
