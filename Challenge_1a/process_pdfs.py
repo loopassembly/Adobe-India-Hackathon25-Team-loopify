@@ -43,7 +43,7 @@ def _looks_like_heading(txt: str) -> bool:
     words = re.split(r"\s+", txt)
     if len(words) < MIN_WORDS or sum(map(len, words)) / len(words) < MIN_AVG_CHARS:
         return False
-    if txt[0] in BULLET_CHARS or txt.rstrip().endswith((",", ":", ";")):
+    if txt[0] in BULLET_CHARS or txt.rstrip().dswith((",", ":", ";")):
         return False
     if txt.isupper() and len(txt) < 15:
         return False
