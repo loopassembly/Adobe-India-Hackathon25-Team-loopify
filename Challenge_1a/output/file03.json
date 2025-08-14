@@ -1,39 +1,79 @@
 {
-  "title": "RRRRFFFFPPPP:::: RRRReeeeqqqquuuueeeesssstttt ffffoooorrrr PPPPrrrrooooppppoooossssaaaallll",
+  "title": "RFP: Request for Proposal  To Present a Proposal for Developing  the Business Plan for the Ontario  Digital Library",
   "outline": [
     {
-      "level": "H1",
-      "text": "RRRRFFFFPPPP:::: RRRReeeeqqqquuuueeeesssstttt ffffoooorrrr PPPPrrrrooooppppoooossssaaaallll",
+      "level": "H2",
+      "text": "Ontario\u2019s Libraries",
       "page": 0
     },
     {
       "level": "H2",
-      "text": "To Present a Proposal for Developing",
+      "text": "Working Together",
       "page": 0
     },
     {
       "level": "H1",
+      "text": "Ontario\u2019s Digital Library",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "A Critical Component for Implementing Ontario\u2019s Road Map to",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Prosperity Strategy",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Summary",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Background",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "The Business Plan to be Developed",
+      "page": 5
+    },
+    {
+      "level": "H3",
+      "text": "Milestones",
+      "page": 6
+    },
+    {
+      "level": "H3",
       "text": "Approach and Specific Proposal Requirements",
       "page": 6
     },
     {
-      "level": "H1",
+      "level": "H3",
+      "text": "Evaluation and Awarding of Contract",
+      "page": 7
+    },
+    {
+      "level": "H3",
       "text": "Appendix A: ODL Envisioned Phases & Funding",
       "page": 8
     },
     {
-      "level": "H1",
-      "text": "OVERVIEW OF ODL FUNDING MODEL",
+      "level": "H3",
+      "text": "Funding Source",
       "page": 9
     },
     {
-      "level": "H1",
-      "text": "Appendix B: ODL Steering Committee Terms of Reference",
+      "level": "H3",
+      "text": "Appendix B:",
       "page": 10
     },
     {
-      "level": "H1",
-      "text": "Appendix C: ODL\u2019s Envisioned Electronic Resources",
+      "level": "H3",
+      "text": "Appendix C:",
       "page": 13
     }
   ]

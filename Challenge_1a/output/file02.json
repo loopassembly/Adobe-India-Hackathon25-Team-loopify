@@ -1,16 +1,6 @@
 {
-  "title": "Foundation Level Extensions",
+  "title": "Overview  Foundation Level Extensions  Version 1.0",
   "outline": [
-    {
-      "level": "H1",
-      "text": "Foundation Level Extensions",
-      "page": 0
-    },
-    {
-      "level": "H2",
-      "text": "International Software Testing Qualifications Board",
-      "page": 0
-    },
     {
       "level": "H1",
       "text": "Revision History",
@@ -20,6 +10,11 @@
       "level": "H1",
       "text": "Table of Contents",
       "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "Acknowledgements",
+      "page": 4
     },
     {
       "level": "H1",
@@ -33,11 +28,31 @@
     },
     {
       "level": "H2",
+      "text": "2.1 Intended Audience",
+      "page": 6
+    },
+    {
+      "level": "H2",
       "text": "2.2 Career Paths for Testers",
       "page": 6
     },
     {
-      "level": "H1",
+      "level": "H2",
+      "text": "2.3 Learning Objectives",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "2.4 Entry Requirements",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "2.5 Structure and Course Duration",
+      "page": 7
+    },
+    {
+      "level": "H2",
       "text": "2.6 Keeping It Current",
       "page": 8
     },
@@ -47,18 +62,23 @@
       "page": 9
     },
     {
+      "level": "H1",
+      "text": "Syllabus",
+      "page": 9
+    },
+    {
       "level": "H2",
       "text": "3.1 Business Outcomes",
       "page": 9
     },
     {
-      "level": "H1",
-      "text": "4. References",
-      "page": 11
+      "level": "H2",
+      "text": "3.2 Content",
+      "page": 9
     },
     {
-      "level": "H2",
-      "text": "4.1 Trademarks",
+      "level": "H1",
+      "text": "4. References",
       "page": 11
     }
   ]

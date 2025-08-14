@@ -1,0 +1,300 @@
+{
+  "title": "",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "Welcome to the \u201cConnecting the Dots\u201d Challenge",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Rethink Reading. Rediscover Knowledge",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "The Journey Ahead",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Round 1:",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Round 2:",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Why This Matters",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "context . You\u2019re not just building tools \u2014 you\u2019re building the future of how we",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "read, learn, and connect . No matter your background \u2014 ML hacker, UI builder,",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Are you in?",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Round 1A: Understand Your Document",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "Challenge Theme: Connecting the Dots Through Docs",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "Your Mission",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "Why This Matters",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "What You Need to Build",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "Title",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "Headings: H1, H2, H3 (with level and page number)",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "You Will Be Provided",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "Docker Requirements",
+      "page": 3
+    },
+    {
+      "level": "H2",
+      "text": "CPU architecture: amd64 (x86_64)",
+      "page": 3
+    },
+    {
+      "level": "H2",
+      "text": "Expected Execution",
+      "page": 3
+    },
+    {
+      "level": "H2",
+      "text": "Constraints",
+      "page": 3
+    },
+    {
+      "level": "H2",
+      "text": "Constraint",
+      "page": 3
+    },
+    {
+      "level": "H2",
+      "text": "No internet access",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "allowed",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Scoring Criteria",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Max",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Criteria",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Points",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Bonus: Multilingual Handling (e.g.,",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Japanese)",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Total",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Submission Checklist",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "Pro Tips",
+      "page": 4
+    },
+    {
+      "level": "H2",
+      "text": "What Not to Do",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "[[Public Dataset Folder]]",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "(For Sample Input and Output Files, please refer to the appendix)",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "Round 1B: Persona-Driven Document Intelligence",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Theme: \u201cConnect What Matters \u2014 For the User Who Matters\u201d",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Challenge Brief (For Participants)",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Input Specification",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Sample Test Cases",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Test Case 1: Academic Research",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Documents : 4 research papers on \"Graph Neural Networks for",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Persona : PhD Researcher in Computational Biology",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Job : \"Prepare a comprehensive literature review focusing on",
+      "page": 6
+    },
+    {
+      "level": "H2",
+      "text": "Test Case 2: Business Analysis",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Documents : 3 annual reports from competing tech companies",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Persona : Investment Analyst",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Job : \"Analyze revenue trends, R&D investments, and market",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Test Case 3: Educational Content",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Documents : 5 chapters from organic chemistry textbooks",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Persona : Undergraduate Chemistry Student",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Job : \"Identify key concepts and mechanisms for exam preparation",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Required Output",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "No internet access allowed during execution",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "Deliverables",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "Scoring Criteria",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "Max",
+      "page": 8
+    },
+    {
+      "level": "H2",
+      "text": "Criteria",
+      "page": 8
+    }
+  ]
+}

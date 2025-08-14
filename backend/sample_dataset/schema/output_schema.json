@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "outline": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "page": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "text",
+            "page"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "title",
+    "outline"
+  ]
+}

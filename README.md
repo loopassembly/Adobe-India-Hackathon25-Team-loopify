@@ -156,4 +156,4 @@ python3 process_collection.py --input_json "Collection 1/challenge1b_input.json"
 - **Approach Documentation**: Complete `approach_explanation.md` with technical methodology
 - **Sample I/O**: Full sample input/output provided for testing
 - **Cross-Integration**: Seamlessly imports Challenge 1A utilities
-- **Performance**: ~12 seconds for largest collection (344 candidates → 5 top sections)
+- **Performance**: ~12 seconds for largest collection (344 candidates → 5 top sections) 

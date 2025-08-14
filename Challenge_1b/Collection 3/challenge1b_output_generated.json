@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "input_documents": [
+      "Breakfast Ideas.pdf",
+      "Dinner Ideas - Mains_1.pdf",
+      "Dinner Ideas - Mains_2.pdf",
+      "Dinner Ideas - Mains_3.pdf",
+      "Dinner Ideas - Sides_1.pdf",
+      "Dinner Ideas - Sides_2.pdf",
+      "Dinner Ideas - Sides_3.pdf",
+      "Dinner Ideas - Sides_4.pdf",
+      "Lunch Ideas.pdf"
+    ],
+    "persona": "Food Contractor",
+    "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items.",
+    "processing_timestamp": "2025-08-08T22:15:23+0000"
+  },
+  "extracted_sections": [
+    {
+      "document": "Lunch Ideas.pdf",
+      "section_title": "Veggie Sushi Rolls",
+      "importance_rank": 1,
+      "page_number": 10
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Vegetable Stir-Fry",
+      "importance_rank": 2,
+      "page_number": 4
+    },
+    {
+      "document": "Dinner Ideas - Mains_1.pdf",
+      "section_title": "Ratatouille",
+      "importance_rank": 3,
+      "page_number": 14
+    },
+    {
+      "document": "Dinner Ideas - Mains_3.pdf",
+      "section_title": "Vegetable Lasagna",
+      "importance_rank": 4,
+      "page_number": 7
+    },
+    {
+      "document": "Breakfast Ideas.pdf",
+      "section_title": "Fruit and Nut Bars",
+      "importance_rank": 5,
+      "page_number": 14
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "Lunch Ideas.pdf",
+      "refined_text": "Ingredients: - 1 cup cooked sushi rice - 1/2 cucumber, julienned - 1/2 avocado, sliced - 1/4 cup carrot, julienned Instructions: - Lay a sheet of nori on a bamboo sushi mat. - Spread a thin layer of sushi rice over the nori, leaving a 1-inch border at the top. - Arrange the cucumber, avocado, and carrot in a line along the bottom edge of the rice. - Roll the nori tightly using the bamboo mat.",
+      "page_number": 10
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "Ingredients: - 1 cup broccoli florets - 1 cup bell peppers, sliced - 1 cup snow peas - 1 small onion, diced Instructions: - In a small bowl, mix soy sauce, oyster sauce, sesame oil, cornstarch, and water. - In a large skillet, heat sesame oil over medium heat. - Saut\u00e9 diced onion and minced garlic until fragrant. - Add broccoli, bell peppers, and snow peas, stir-fry until tender.",
+      "page_number": 4
+    },
+    {
+      "document": "Dinner Ideas - Mains_1.pdf",
+      "refined_text": "Ingredients: - 1 eggplant, diced - 1 zucchini, diced - 1 bell pepper, diced - 1 small onion, diced",
+      "page_number": 14
+    },
+    {
+      "document": "Dinner Ideas - Mains_3.pdf",
+      "refined_text": "Ingredients: - 9 lasagna noodles, cooked - 1 small onion, diced - 2 cloves garlic, minced - 1 zucchini, sliced",
+      "page_number": 7
+    },
+    {
+      "document": "Breakfast Ideas.pdf",
+      "refined_text": "Ingredients: - 1 cup dates, pitted - 1 cup mixed nuts - 1/4 cup dried fruit - 1 tablespoon honey Instructions: - In a food processor, combine dates, mixed nuts, dried fruit, and honey. - Process until the mixture comes together. - Press the mixture into a greased baking dish. - Refrigerate for at least 1 hour before cutting into bars.",
+      "page_number": 14
+    }
+  ]
+}

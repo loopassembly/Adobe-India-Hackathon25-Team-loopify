@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "input_documents": [
+      "Learn Acrobat - Create and Convert_1.pdf",
+      "Learn Acrobat - Create and Convert_2.pdf",
+      "Learn Acrobat - Edit_1.pdf",
+      "Learn Acrobat - Edit_2.pdf",
+      "Learn Acrobat - Export_1.pdf",
+      "Learn Acrobat - Export_2.pdf",
+      "Learn Acrobat - Fill and Sign.pdf",
+      "Learn Acrobat - Generative AI_1.pdf",
+      "Learn Acrobat - Generative AI_2.pdf",
+      "Learn Acrobat - Request e-signatures_1.pdf",
+      "Learn Acrobat - Request e-signatures_2.pdf",
+      "Learn Acrobat - Share_1.pdf",
+      "Learn Acrobat - Share_2.pdf",
+      "Test Your Acrobat Exporting Skills.pdf",
+      "The Ultimate PDF Sharing Checklist.pdf"
+    ],
+    "persona": "HR professional",
+    "job_to_be_done": "Create and manage fillable forms for onboarding and compliance.",
+    "processing_timestamp": "2025-08-09T12:39:08+0000"
+  },
+  "extracted_sections": [
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "section_title": "Change flat forms to fillable (Acrobat Pro)",
+      "importance_rank": 1,
+      "page_number": 11
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "section_title": "Fill in interactive forms",
+      "importance_rank": 2,
+      "page_number": 7
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "section_title": "Request signatures \u2013 Add recipients",
+      "importance_rank": 3,
+      "page_number": 1
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "section_title": "2. The Request Signatures window is displayed. It displays the fields progressively as you",
+      "importance_rank": 4,
+      "page_number": 1
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_2.pdf",
+      "section_title": "XML data signatures",
+      "importance_rank": 5,
+      "page_number": 9
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "refined_text": "Change flat forms to fillable (Acrobat Pro)\nYou can change a flat form to a fillable form by either using the Prepare Form tool or\nenabling the Fill & Sign tools. Acrobat and Acrobat Reader users can use the Fill & Sign tool\nto fill in flat forms. Interactive form\nTo create an interactive form, use the Prepare Forms tool.",
+      "page_number": 11
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "refined_text": "Fill in PDF Forms\nIs the form fillable? Not all forms are fillable. Sometimes form creators don\u2019t convert their PDFs to\ninteractive fillable forms.",
+      "page_number": 7
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "refined_text": "Send a document to get signatures from\nothers\n1. Open the PDF form in Acrobat or Acrobat Reader, and then choose All\ntools > Request E-signatures. Alternatively, you can select Sign from the top toolbar.",
+      "page_number": 1
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "refined_text": "Send a document to get signatures from\nothers\n1. Open the PDF form in Acrobat or Acrobat Reader, and then choose All\ntools > Request E-signatures. Alternatively, you can select Sign from the top toolbar.",
+      "page_number": 1
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_2.pdf",
+      "refined_text": "For a list and explanation of each warning, see the DigSig Admin Guide. XML data signatures\nAcrobat and Acrobat Reader support XML data signatures that are used to sign data in XML\nForms Architectures (XFA) forms. The form author provides XML signing, validating, or\nclearing instructions for form events, such as button click, file save, or submit.",
+      "page_number": 9
+    }
+  ]
+}
