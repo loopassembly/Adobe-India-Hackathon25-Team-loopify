@@ -1,4 +1,3 @@
-#!/bin/bash
-set -e
-export PYTHONUNBUFFERED=1
-uvicorn server:app --host 0.0.0.0 --port 8080 --reload
+#!/usr/bin/env bash
+set -euo pipefail
+exec uvicorn server:app --host 0.0.0.0 --port 8080

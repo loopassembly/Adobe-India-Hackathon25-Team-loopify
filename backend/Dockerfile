@@ -1,27 +1,28 @@
+# syntax=docker/dockerfile:1
 FROM python:3.10-slim
 
-# System deps for pdfplumber/poppler
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpoppler-cpp-dev \
-    pkg-config \
-    libgl1-mesa-glx \
-    libsm6 \
-    libxext6 \
-    libxrender-dev && \
-    rm -rf /var/lib/apt/lists/*
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# System deps (basic) — slim image
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential git curl tini && \
+    rm -rf /var/lib/apt/lists/*
 
-# app code
-COPY server.py .
-COPY process_pdfs.py .
+# Copy & install
+COPY requirements.txt /app/requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# data dirs
-RUN mkdir -p /app/data/uploads /app/data/audio
+# App code
+COPY process_pdfs.py server.py retrieval.py llm_bridge.py audio_bridge.py /app/
+# Adobe-provided scripts (as-is)
+COPY chat_with_llm.py generate_audio.py /app/
+# Runtime dirs
+RUN mkdir -p /app/data/pdfs /app/data/audio /app/data/index
 
 EXPOSE 8080
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8080"]
+ENTRYPOINT ["/usr/bin/tini","--"]
+CMD ["uvicorn","server:app","--host","0.0.0.0","--port","8080"]

@@ -1,0 +1,209 @@
+{
+  "info": {
+    "name": "DocDots Backend - Selection First",
+    "_postman_id": "8b6a0b2e-2c1a-4d7a-b2c0-3d8f0c3a19aa",
+    "description": "Postman collection for DocDots backend (health, index, docs, outline, recommendations, insights, select, podcast). Selection-first: no persona/job anywhere.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "document", "value": "Lunch Ideas.pdf" },
+    { "key": "page", "value": "0" },
+    { "key": "top_k", "value": "5" },
+    { "key": "selection", "value": "Veggie Sushi Rolls" },
+    { "key": "voice", "value": "en-US-JennyNeural" },
+    { "key": "format", "value": "audio-48khz-192kbitrate-mono-mp3" },
+    { "key": "audioPath", "value": "/data/audio/example.mp3" }
+  ],
+  "item": [
+    {
+      "name": "1) Health",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] }
+      }
+    },
+    {
+      "name": "2) Index (upload files)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "files", "type": "file", "src": [] }
+          ]
+        },
+        "url": { "raw": "{{baseUrl}}/index", "host": ["{{baseUrl}}"], "path": ["index"] },
+        "description": "Upload one or more PDFs (key: files). No persona/job fields."
+      }
+    },
+    {
+      "name": "3) Index (rebuild from disk)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": { "mode": "formdata", "formdata": [] },
+        "url": { "raw": "{{baseUrl}}/index", "host": ["{{baseUrl}}"], "path": ["index"] },
+        "description": "No files → re-index existing PDFs in /data/pdfs."
+      }
+    },
+    {
+      "name": "4) List Docs",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": { "raw": "{{baseUrl}}/docs", "host": ["{{baseUrl}}"], "path": ["docs"] }
+      }
+    },
+    {
+      "name": "5) Get Outline",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/outline?document={{document}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["outline"],
+          "query": [{ "key": "document", "value": "{{document}}" }]
+        }
+      }
+    },
+    {
+      "name": "6) Recommendations (by page, optional selection)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"document\": \"{{document}}\",\n  \"page\": {{page}},\n  \"top_k\": {{top_k}},\n  \"selection\": \"\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/recommendations", "host": ["{{baseUrl}}"], "path": ["recommendations"] },
+        "description": "Returns related sections. If selection is non-empty, it’s used in addition to (or instead of) page anchoring."
+      }
+    },
+    {
+      "name": "7) Recommendations (with selection text)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"document\": \"{{document}}\",\n  \"page\": {{page}},\n  \"top_k\": {{top_k}},\n  \"selection\": \"{{selection}}\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/recommendations", "host": ["{{baseUrl}}"], "path": ["recommendations"] },
+        "description": "Same endpoint as above, but shows the selection-first usage."
+      }
+    },
+    {
+      "name": "8) Insights (by page, optional selection)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"document\": \"{{document}}\",\n  \"page\": {{page}},\n  \"top_k\": 3,\n  \"selection\": \"\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/insights", "host": ["{{baseUrl}}"], "path": ["insights"] },
+        "description": "Grounded summary + optional 'Did you know?'. Provider picked via env (Gemini/Azure OpenAI/OpenAI)."
+      }
+    },
+    {
+      "name": "9) Insights (with selection text)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"document\": \"{{document}}\",\n  \"page\": {{page}},\n  \"top_k\": 3,\n  \"selection\": \"{{selection}}\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/insights", "host": ["{{baseUrl}}"], "path": ["insights"] },
+        "description": "Same endpoint; explicitly passes user-selected text."
+      }
+    },
+    {
+      "name": "10) Select (ad-hoc text → related + insight)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"selection\": \"{{selection}}\",\n  \"top_k\": {{top_k}}\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/select", "host": ["{{baseUrl}}"], "path": ["select"] },
+        "description": "No document/page required. Returns related sections across the corpus + grounded insight."
+      }
+    },
+    {
+      "name": "11) Podcast (TTS)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"saved audio url\", function () {",
+              "  try {",
+              "    const json = pm.response.json();",
+              "    if (json && json.audio_url) {",
+              "      pm.collectionVariables.set(\"audioPath\", json.audio_url);",
+              "    }",
+              "    pm.expect(json.audio_url).to.be.a('string');",
+              "  } catch (e) {",
+              "    console.log('no json to parse');",
+              "  }",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"Two-sentence overview about this section.\",\n  \"voice\": \"{{voice}}\",\n  \"format\": \"{{format}}\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/podcast", "host": ["{{baseUrl}}"], "path": ["podcast"] },
+        "description": "Synthesizes audio using configured TTS provider. Test script stores audio_url → {{audioPath}}."
+      }
+    },
+    {
+      "name": "12) Open Generated Audio (from last response)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}{{audioPath}}", "host": ["{{baseUrl}}"], "path": [], "query": [], "variable": [] },
+        "description": "Opens the audio file produced by /podcast."
+      }
+    },
+    {
+      "name": "13) Open PDF (example)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/data/pdfs/{{document}}", "host": ["{{baseUrl}}"], "path": ["data", "pdfs", "{{document}}"] },
+        "description": "Static PDF served by backend (handy to verify files)."
+      }
+    }
+  ]
+}
