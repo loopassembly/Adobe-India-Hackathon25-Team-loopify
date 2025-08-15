@@ -1,3 +1,4 @@
+// src/components/Insights.tsx
 import React from "react";
 
 type Props = {
@@ -19,13 +20,13 @@ export default function Insights({ text, loading }: Props) {
   }
 
   if (!text) {
-    return <div className="text-sm text-slate-500">No insights for this section yet.</div>;
+    return <div className="text-sm text-slate-500">No insights yet.</div>;
   }
 
   // Try to split a "Did you know?" if present
-  const didYouKnowIdx = text.toLowerCase().indexOf("did you know");
-  const main = didYouKnowIdx >= 0 ? text.slice(0, didYouKnowIdx).trim() : text;
-  const dyk = didYouKnowIdx >= 0 ? text.slice(didYouKnowIdx).trim() : "";
+  const dykIdx = text.toLowerCase().indexOf("did you know");
+  const main = dykIdx >= 0 ? text.slice(0, dykIdx).trim() : text;
+  const dyk = dykIdx >= 0 ? text.slice(dykIdx).trim() : "";
 
   return (
     <div className="space-y-3">
