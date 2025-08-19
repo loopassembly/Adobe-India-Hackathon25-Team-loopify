@@ -1,159 +1,203 @@
-# Adobe India Hackathon 2025 - Team Loopify Solutions
+# Loopify: Unified Backend & Frontend (Docker, Port 8080)
 
-## Overview
-This repository contains our **production-ready solutions** for Challenge 1A and Challenge 1B of the Adobe India Hackathon 2025. Both challenges involve advanced PDF processing: Challenge 1A focuses on outline extraction with ML-enhanced heading detection, while Challenge 1B performs collection-level analysis with persona-aware content ranking. Both solutions are containerized using Docker and meet all performance and resource constraints.
-
-## Official Challenge Guidelines
-
-### Submission Requirements
-- **GitHub Project**: Complete code repository with working solution
-- **Dockerfile**: Must be present in the root directory and functional
-- **README.md**:  Documentation explaining the solution, models, and libraries used
-
-### Build Command
-```bash
-docker build --platform linux/amd64 -t <reponame.someidentifier> .
-```
-
-### Run Command
-```bash
-docker run --rm -v $(pwd)/input:/app/input:ro -v $(pwd)/output/repoidentifier/:/app/output --network none <reponame.someidentifier>
-```
-
-### Critical Constraints
-- **Execution Time**: ≤ 10 seconds for a 50-page PDF
-- **Model Size**: ≤ 200MB (if using ML models)
-- **Network**: No internet access allowed during runtime execution
-- **Runtime**: Must run on CPU (amd64) with 8 CPUs and 16 GB RAM
-- **Architecture**: Must work on AMD64, not ARM-specific
-
-### Key Requirements
-- **Automatic Processing**: Process all PDFs from `/app/input` directory
-- **Output Format**: Generate `filename.json` for each `filename.pdf`
-- **Input Directory**: Read-only access only
-- **Open Source**: All libraries, models, and tools must be open source
-- **Cross-Platform**: Test on both simple and complex PDFs
-
-## Solution Structure
-```
-Adobe-India-Hackathon25-Team-loopify/
-├── Challenge_1a/           # PDF Outline Extraction Solution
-│   ├── sample_dataset/     # Training and test data
-│   ├── process_pdfs.py     # Advanced processing script with ML
-│   ├── heading_model.pkl   # Trained model (92KB)
-│   ├── Dockerfile          # AMD64 compatible container
-│   ├── requirements.txt    # Pinned dependencies
-│   └── README.md          # Detailed implementation docs
-├── Challenge_1b/           # Collection Processing Solution
-│   ├── Collection 1/       # Travel planning test case
-│   ├── Collection 2/       # Adobe Acrobat test case
-│   ├── Collection 3/       # Recipe collection test case
-│   ├── process_collection.py # TF-IDF ranking script
-│   ├── approach_explanation.md # Technical methodology
-│   └── Dockerfile          # Production container
-└── README.md              # This file
-```
-
-## Implementation Highlights
-
-### Challenge 1A: Advanced PDF Outline Extraction
-Our `process_pdfs.py` implements a **production-grade solution** featuring:
-- Hybrid ML approach: Heuristic filtering + GradientBoostingClassifier
-- Surgical noise elimination (TOC artifacts, bullets, single words)
-- Context-aware heading detection using font ratios and whitespace gaps
-- Hierarchical level assignment (H1, H2, H3)
-- 92KB trained model with excellent precision
-
-### Challenge 1B: Collection-Level Processing
-Our `process_collection.py` provides **persona-aware content ranking**:
-- TF-IDF vectorization with cosine similarity scoring
-- Relevance ranking based on user persona + job requirements
-- Top-5 section selection with importance ranking
-- Cross-collection support (3-15 documents)
-- Reuses Challenge 1A heading extraction utilities
-
-### Performance Results
-**Challenge 1A:**
-```
-File        Ground Truth → Our Results    Quality
-file01.json     0 → 1                    ✅ (title extracted)
-file02.json    17 → 12                   ✅ (clean, no noise)
-file03.json    39 → 7                    ✅ (filtered noise)
-file04.json     1 → 2                    ✅ (close match)
-file05.json     1 → 1                    ✅ (perfect match)
-```
-
-**Challenge 1B:**
-```
-Collection 1 (Travel):     5 candidate sections  → 5 top sections ✅
-Collection 2 (Acrobat):   344 candidate sections → 5 top sections ✅
-Collection 3 (Recipes):     0 candidate sections → 0 sections ✅*
-```
-*Expected behavior for different document formatting
-
-### Production Docker Configuration
-```dockerfile
-FROM --platform=linux/amd64 python:3.10-slim AS runtime
-RUN apt-get update && apt-get install -y build-essential gcc
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY process_pdfs.py heading_model.pkl ./
-ENTRYPOINT ["python", "process_pdfs.py", "--input_dir", "/app/input", "--output_dir", "/app/output", "--model", "heading_model.pkl"]
-```
-
-## Expected Output Format
-
-### Required JSON Structure
-Each PDF should generate a corresponding JSON file that **must conform to the schema** defined in `sample_dataset/schema/output_schema.json`.
-
-
-## Implementation Guidelines
-
-### Performance Considerations
-- **Memory Management**: Efficient handling of large PDFs
-- **Processing Speed**: Optimize for sub-10-second execution
-- **Resource Usage**: Stay within 16GB RAM constraint
-- **CPU Utilization**: Efficient use of 8 CPU cores
-
-### Testing Strategy
-- **Simple PDFs**: Test with basic PDF documents
-- **Complex PDFs**: Test with multi-column layouts, images, tables
-- **Large PDFs**: Verify 50-page processing within time limit
-
-
-## Testing Your Solution
-
-### Local Testing
-```bash
-# Challenge 1A - Build and test
-cd Challenge_1a
-docker build --platform linux/amd64 -t challenge1a-loopify .
-docker run --rm -v $(pwd)/sample_dataset/pdfs:/app/input -v $(pwd)/test_output:/app/output --network none challenge1a-loopify
-
-# Challenge 1B - Local test
-cd ../Challenge_1b
-python3 process_collection.py --input_json "Collection 1/challenge1b_input.json" --pdf_dir "Collection 1/PDFs" --output_json "test_output.json"
-```
-
-### Validation Checklist
-- [x] All PDFs in input directory are processed
-- [x] JSON output files are generated for each PDF
-- [x] Output format matches required structure
-- [x] **Output conforms to schema** in `sample_dataset/schema/output_schema.json`
-- [x] Processing completes within 10 seconds for 50-page PDFs (~4 seconds actual)
-- [x] Solution works without internet access
-- [x] Memory usage stays within 16GB limit
-- [x] Compatible with AMD64 architecture
-- [x] Model size under 200MB (92KB actual)
-- [x] High precision heading detection with noise filtering
+This repository contains the full-stack solution for Loopify, combining a Python FastAPI backend and a React/Vite frontend, both served from a single Docker container on port **8080** using nginx as a reverse proxy.
 
 ---
 
-**Status**: Both Challenge 1A and 1B solutions are production-ready, fully tested, and compliant with all hackathon requirements. Features advanced ML techniques, surgical noise filtering, and persona-aware content ranking. Ready for submission! 🚀
+## Features
 
-## Additional Challenge 1B Features
-- **Approach Documentation**: Complete `approach_explanation.md` with technical methodology
-- **Sample I/O**: Full sample input/output provided for testing
-- **Cross-Integration**: Seamlessly imports Challenge 1A utilities
-- **Performance**: ~12 seconds for largest collection (344 candidates → 5 top sections) 
+- **Single Dockerfile**: Runs both backend and frontend on port 8080
+- **Backend**: FastAPI (Python) for document processing, LLM, TTS, and REST APIs
+- **Frontend**: React + Vite + Tailwind CSS for modern UI
+- **nginx**: Serves static frontend and proxies API requests to backend
+
+---
+
+## Project Structure
+
+```
+├── backend/                # Python FastAPI backend
+│   ├── server.py           # Main API server
+│   ├── ...                 # Other backend modules
+│   └── requirements.txt    # Python dependencies
+├── docdots-frontend/       # React + Vite frontend
+│   ├── src/                # Frontend source code
+│   └── package.json        # Frontend dependencies
+├── Dockerfile              # Unified Dockerfile (root)
+├── nginx.conf              # nginx config for proxy/static
+├── start.sh                # Entrypoint script
+└── README.md               # This file
+```
+
+---
+
+## Step-by-Step Setup & Usage
+
+### 1. Build the Docker Image
+
+Make sure Docker is installed. Run:
+
+```bash
+docker build -t loopify-app .
+```
+
+### 2. Run the Container
+
+Use the following command (replace secrets as needed):
+
+```bash
+docker run --rm \
+  -p 8080:8080 \
+  -e ADOBE_EMBED_API_KEY='87fd9dfa2dd74230aa2b211c5e001c8d' \
+  -e LLM_PROVIDER=gemini \
+  -e GEMINI_MODEL='gemini-2.5-flash' \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/backend/credentials/gcp.json \
+  -e TTS_PROVIDER=azure \
+  -e AZURE_TTS_KEY='your_azure_tts_key' \
+  -e AZURE_TTS_ENDPOINT='your_azure_tts_endpoint' \
+  loopify-app
+```
+
+### 3. Access the App
+
+- Open your browser and go to: [http://localhost:8080](http://localhost:8080)
+- The frontend UI will load. All API requests are proxied to the backend.
+
+---
+
+## How It Works
+
+### Dockerfile (root)
+
+- Installs Python, Node.js, nginx
+- Installs backend dependencies
+- Builds frontend static files
+- Configures nginx to serve frontend and proxy `/api` requests to backend
+- Entrypoint: `start.sh` launches both backend and nginx
+
+### start.sh
+
+- Starts FastAPI backend on port 9000
+- Starts nginx (serves frontend, proxies API to backend)
+- Monitors both processes
+
+### nginx.conf
+
+- Serves static files from `/frontend/dist` on `/`
+- Proxies API requests to backend at `http://127.0.0.1:9000`
+- All traffic is exposed on port 8080
+
+---
+
+## Development (Local)
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn server:app --reload --port 9000
+```
+
+### Frontend
+
+```bash
+cd docdots-frontend
+npm install
+npm run dev
+```
+
+---
+
+## Environment Variables
+
+Set these when running the Docker container:
+
+- `ADOBE_EMBED_API_KEY` - Adobe Embed API Key (`87fd9dfa2dd74230aa2b211c5e001c8d`)
+- `LLM_PROVIDER` - LLM provider (e.g., gemini)
+- `GEMINI_MODEL` - Gemini model name
+- `GOOGLE_APPLICATION_CREDENTIALS` - Path to GCP credentials
+- `TTS_PROVIDER` - TTS provider (e.g., azure)
+- `AZURE_TTS_KEY` - Azure TTS API key
+- `AZURE_TTS_ENDPOINT` - Azure TTS endpoint
+
+---
+
+## Troubleshooting
+
+- Make sure all environment variables are set correctly
+- Check Docker build logs for errors
+- Ensure port 8080 is not in use
+- For API errors, check backend logs
+
+---
+
+## References
+
+- See `backend/README.md` and `docdots-frontend/README.md` for more details on each part
+- Dockerfile, nginx.conf, and start.sh in the root for deployment logic
+
+---
+
+## Backend API Endpoints
+
+All endpoints are served by the FastAPI backend. Swagger UI is available at `/swagger`.
+
+| Endpoint           | Method | Description                                                  |
+| ------------------ | ------ | ------------------------------------------------------------ |
+| `/health`          | GET    | Health and status check (model, cache, etc.)                 |
+| `/status`          | GET    | Embedding/model status only                                  |
+| `/tts/test`        | GET    | Test TTS synthesis; returns sample audio                     |
+| `/docs`            | GET    | List available PDF documents                                 |
+| `/index`           | POST   | Upload and/or (re)index PDFs (multipart or disk)             |
+| `/outline`         | GET    | Get outline for a document (requires `document` query param) |
+| `/recommendations` | POST   | Get related/recommended sections (semantic search)           |
+| `/insights`        | POST   | Get structured insights (markdown) for a selection or page   |
+| `/podcast`         | POST   | Generate podcast audio (TTS, script planning)                |
+| `/select`          | POST   | Search and get insights for a selection                      |
+
+### Example Request: Recommendations
+
+```json
+POST /recommendations
+{
+  "document": "file01.pdf",
+  "page": 0,
+  "selection": "What is the main topic?",
+  "top_k": 5
+}
+```
+
+### Example Request: Insights
+
+```json
+POST /insights
+{
+  "document": "file01.pdf",
+  "page": 0,
+  "selection": "Key findings",
+  "top_k": 3
+}
+```
+
+### Example Request: Podcast
+
+```json
+POST /podcast
+{
+  "document": "file01.pdf",
+  "page": 0,
+  "selection": "Summary of section",
+  "style": "podcast",
+  "speakers": 2,
+  "duration_min": 3.0,
+  "voices": ["alloy", "verse"],
+  "format": "audio-48khz-192kbitrate-mono-mp3"
+}
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License.
