@@ -211,6 +211,35 @@ def _generate_cloud_tts_chunked(text, output_file, provider, voice, max_chars):
             except Exception:
                 pass
 
+def _normalize_azure_endpoint(ep: str) -> str:
+    """Return endpoint without trailing slash; empty string if None."""
+    if not ep:
+        return ""
+    return ep.strip().rstrip("/")
+
+def _build_azure_tts_url(endpoint: str, deployment: str, api_version: str) -> str:
+    """
+    Build the final Azure OpenAI TTS URL.
+
+    Accepts either:
+    - Base endpoint, e.g. https://<resource>.cognitiveservices.azure.com
+    - Full path that already includes /openai/deployments/... (optionally with api-version)
+
+    Ensures api-version is present exactly once.
+    """
+    ep = _normalize_azure_endpoint(endpoint)
+    if not ep:
+        return ""
+    # If AZURE_TTS_ENDPOINT already includes the deployments path, treat it as a full URL.
+    if "/openai/deployments/" in ep:
+        # Append api-version if it's not already there.
+        if "api-version=" in ep:
+            return ep
+        sep = "&" if "?" in ep else "?"
+        return f"{ep}{sep}api-version={api_version}"
+    # Otherwise, build the standard path.
+    return f"{ep}/openai/deployments/{deployment}/audio/speech?api-version={api_version}"
+
 def _generate_azure_tts(text, output_file, voice=None):
     """Generate audio using Azure OpenAI TTS."""
     api_key = os.getenv("AZURE_TTS_KEY")
@@ -218,38 +247,53 @@ def _generate_azure_tts(text, output_file, voice=None):
     deployment = os.getenv("AZURE_TTS_DEPLOYMENT", "tts")
     voice = voice or os.getenv("AZURE_TTS_VOICE", "alloy")
     api_version = os.getenv("AZURE_TTS_API_VERSION", "2025-03-01-preview")
-    
+
     if not api_key or not endpoint:
         raise ValueError("AZURE_TTS_KEY and AZURE_TTS_ENDPOINT must be set for Azure OpenAI TTS")
-    
-    headers = {
-        "api-key": api_key,
+
+    url = _build_azure_tts_url(endpoint, deployment, api_version)
+    if not url:
+        raise ValueError("Invalid AZURE_TTS_ENDPOINT")
+
+    base_headers = {
         "Content-Type": "application/json"
     }
-    
+
     payload = {
         "model": deployment,
         "input": text,
         "voice": voice,
     }
-    
-    try:
-        response = requests.post(
-            f"{endpoint}/openai/deployments/{deployment}/audio/speech?api-version={api_version}",
-            headers=headers,
-            json=payload,
-            timeout=30
-        )
-        response.raise_for_status()
-        
-        with open(output_file, "wb") as f:
-            f.write(response.content)
-        
-        print(f"Azure OpenAI TTS audio saved to: {output_file}")
-        return output_file
-        
-    except requests.exceptions.RequestException as e:
-        raise RuntimeError(f"Azure OpenAI TTS failed: {e}")
+
+    # Try with api-key header first; if unauthorized or forbidden, try Bearer style.
+    attempts = [
+        {"api-key": api_key},
+        {"Authorization": f"Bearer {api_key}"},
+    ]
+
+    last_err = None
+    for auth_hdr in attempts:
+        try:
+            headers = {**base_headers, **auth_hdr}
+            response = requests.post(url, headers=headers, json=payload, timeout=30)
+            # For wrong auth style or missing deployment, Azure may return 401/403/404
+            if response.status_code in (401, 403, 404) and auth_hdr is attempts[0]:
+                # Try the next auth style
+                last_err = RuntimeError(f"Azure TTS auth/path check failed ({response.status_code}): {response.text[:200]}")
+                continue
+            response.raise_for_status()
+            with open(output_file, "wb") as f:
+                f.write(response.content)
+            print(f"Azure OpenAI TTS audio saved to: {output_file}")
+            return output_file
+        except requests.exceptions.RequestException as e:
+            last_err = e
+            # On first attempt, fall through to try the alternate auth; otherwise raise.
+            if auth_hdr is not attempts[0]:
+                break
+
+    # If we reach here, both attempts failed.
+    raise RuntimeError(f"Azure OpenAI TTS failed: {last_err}")
 
 def _generate_gcp_tts(text, output_file, voice=None):
     """Generate audio using Google Cloud Text-to-Speech."""
@@ -264,15 +308,11 @@ def _generate_gcp_tts(text, output_file, voice=None):
     try:
         # Use API key if available, otherwise use service account credentials
         if api_key:
-            # For API key authentication, we need to use the REST API directly
-            import requests
-            
-            url = "https://texttospeech.googleapis.com/v1/text:synthesize"
+            url = f"https://texttospeech.googleapis.com/v1/text:synthesize?key={api_key}"
             headers = {
-                "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
             }
-            
+
             payload = {
                 "input": {"text": text},
                 "voice": {
@@ -283,17 +323,17 @@ def _generate_gcp_tts(text, output_file, voice=None):
                     "audioEncoding": "MP3"
                 }
             }
-            
+
             response = requests.post(url, headers=headers, json=payload, timeout=30)
             response.raise_for_status()
-            
+
             # Decode the base64 audio content
             import base64
             audio_content = base64.b64decode(response.json()["audioContent"])
-            
+
             with open(output_file, "wb") as f:
                 f.write(audio_content)
-                
+
         else:
             # Use service account credentials
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
