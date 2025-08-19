@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ring: 0 0 #0000;
+}
+
+.card {
+  @apply bg-card border border-border rounded-xl shadow-card;
+}
+
+.btn {
+  @apply inline-flex items-center gap-2 h-10 px-4 rounded-xl font-medium;
+}
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primaryHover;
+}
+.btn-secondary {
+  @apply bg-white text-primary border border-border;
+}
+.input {
+  @apply h-10 rounded-xl px-3 border border-border bg-white outline-none;
+}
+.input:focus {
+  @apply ring-4 ring-primaryFocus border-primary;
+}
+.badge {
+  @apply inline-flex items-center justify-center px-2 h-5 rounded;
+}
+.badge-level {
+  @apply border border-primary text-primary bg-subtle rounded-md h-7 px-2 text-xs font-semibold;
+}
+
+.outline-panel {
+  /* Fit within the viewport minus header & paddings */
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  padding-right: 0.25rem; /* keeps scrollbar off text */
+}
+
+/* --- Scroll helpers for fixed-height columns --- */
+.scroll-area { @apply min-h-0 overflow-auto; }
+
+/* Left "Documents" list — own scroller inside the sidebar */
+.sidebar-list {
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+}
+
+/* Right rail lists (Related / Insights) */
+.recs-panel {
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  padding-bottom: 1rem; /* bottom breathing room */
+}
+
+/* Keep the Extracted Title card visible even when the list scrolls */
+.sticky-title {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+}
+
+/* Make custom scrollbars consistent (WebKit/Blink) */
+.scroll-area::-webkit-scrollbar,
+.outline-panel::-webkit-scrollbar,
+.sidebar-list::-webkit-scrollbar,
+.recs-panel::-webkit-scrollbar { width: 8px; height: 8px; }
+
+.scroll-area::-webkit-scrollbar-thumb,
+.outline-panel::-webkit-scrollbar-thumb,
+.sidebar-list::-webkit-scrollbar-thumb,
+.recs-panel::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.18);
+  border-radius: 9999px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover,
+.outline-panel::-webkit-scrollbar-thumb:hover,
+.sidebar-list::-webkit-scrollbar-thumb:hover,
+.recs-panel::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.3); }
+
+.scroll-area::-webkit-scrollbar-track,
+.outline-panel::-webkit-scrollbar-track,
+.sidebar-list::-webkit-scrollbar-track,
+.recs-panel::-webkit-scrollbar-track { background: transparent; }
