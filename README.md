@@ -115,7 +115,7 @@ Set these when running the Docker container:
 
 - `ADOBE_EMBED_API_KEY` - Adobe Embed API Key (`87fd9dfa2dd74230aa2b211c5e001c8d`)
 - `LLM_PROVIDER` - LLM provider (e.g., gemini)
-- `GEMINI_MODEL` - Gemini model name
+- `GEMINI_MODEL` - gemini 2.5 flash
 - `GOOGLE_APPLICATION_CREDENTIALS` - Path to GCP credentials
 - `TTS_PROVIDER` - TTS provider (e.g., azure)
 - `AZURE_TTS_KEY` - Azure TTS API key
