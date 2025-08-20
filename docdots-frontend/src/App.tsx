@@ -70,6 +70,10 @@ export default function App() {
   const [statusTitle, setStatusTitle] = useState<"open" | "bulk">("bulk");
   const pollRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
+  // Progress trickle helpers
+  const trickleRef = useRef<number | null>(null);
+  const lastServerPctRef = useRef<number>(5);
+  const capTo100Ref = useRef<boolean>(false);
 
   const viewerRef = useRef<PdfViewerHandle>(null);
   const bulkInputRef = useRef<HTMLInputElement>(null);
@@ -165,7 +169,7 @@ export default function App() {
 
       try {
         if (!preserve) {
-          const r = await fetchRecommendations(selectedDoc, 0);
+          const r = await fetchRecommendations(selectedDoc, 2);
           if (!cancelled) setRecs(r?.results || []);
         }
       } catch {
@@ -174,7 +178,7 @@ export default function App() {
 
       try {
         if (!preserve) {
-          const i = await fetchInsights(selectedDoc, 0);
+          const i = await fetchInsights(selectedDoc, 2);
           if (!cancelled) setInsightText(i?.text || "");
         }
       } catch {
@@ -202,13 +206,13 @@ export default function App() {
 
     (async () => {
       try {
-        const r = await fetchRecommendations(selectedDoc, page);
+        const r = await fetchRecommendations(selectedDoc, page + 2);
         if (!cancelled) setRecs(r?.results || []);
       } catch {
         if (!cancelled) setRecs([]);
       }
       try {
-        const i = await fetchInsights(selectedDoc, page);
+        const i = await fetchInsights(selectedDoc, page + 2);
         if (!cancelled) setInsightText(i?.text || "");
       } catch {
         if (!cancelled) setInsightText("");
@@ -228,61 +232,72 @@ export default function App() {
     stopStatusPolling();
     setStatusTitle(kind);
 
-    // We keep polling status and "trickling" progress so the bar always moves.
-    // The bar will only be hidden after /index returns { status: "ok" } in doIndex().
+    // reset trickle helpers
+    lastServerPctRef.current = Math.max(5, statusPct || 5);
+    capTo100Ref.current = false;
+
+    // 1) Poll backend status periodically to update text + server-reported % (if any)
     pollRef.current = window.setInterval(async () => {
       try {
         const s = await getStatus();
 
-        // Update status text
-        setStatusText(s.message || s.phase);
+        // Update status text from server
+        setStatusText(s.message || s.phase || (kind === "open" ? "Opening & indexing…" : "Uploading & indexing…"));
 
-        // Smooth progress: always move forward a little, but cap at 92% until final OK.
-        setStatusPct((prev) => {
-          const server = Number.isFinite(s.progress as any) ? s.progress : 0;
-          // never go backwards
-          const base = Math.max(prev, server || 0);
+        // Remember the latest server % but never go backwards
+        const serverPct = Number.isFinite((s as any).progress) ? (s as any).progress as number : 0;
+        if (serverPct > 0) {
+          lastServerPctRef.current = Math.max(lastServerPctRef.current, serverPct);
+        }
 
-          if (s.phase === "ready") {
-            // allow progress to hit 100%, overlay will be hidden by doIndex() after OK
-            return 100;
-          }
-          if (s.phase === "error") {
-            // stop trickling; keep current percent so user can see something happened
-            return base;
-          }
-
-          const CAP = 92;
-          if (base >= CAP) return base;
-
-          // bump gets smaller as we approach CAP
-          const remaining = Math.max(0, CAP - base);
-          const bump = Math.max(0.3, Math.min(1.2, remaining * 0.03));
-          const next = Math.min(CAP, base + bump);
-          return Number(next.toFixed(2));
-        });
+        // If backend says ready, allow cap to reach 100 (but still keep overlay until POST /index says OK)
+        if (s.phase === "ready") {
+          capTo100Ref.current = true;
+        }
       } catch {
-        // On transient errors, still trickle a tiny bit so the UI feels alive.
-        setStatusPct((prev) => {
-          const CAP = 90;
-          if (prev >= CAP) return prev;
-          const next = Math.min(CAP, prev + 0.4);
-          return Number(next.toFixed(2));
-        });
+        // Keep previous text; trickle keeps UI alive even if status endpoint hiccups
       }
-    }, 800) as unknown as number;
+    }, 1200) as unknown as number;
 
-    // Do NOT hide overlay on timeout; just stop polling and keep showing "Still working..."
+    // 2) Independent smooth trickle — always move a bit until final OK
+    trickleRef.current = window.setInterval(() => {
+      setStatusPct((prev) => {
+        const cap = capTo100Ref.current ? 100 : 92;
+        const base = Math.max(prev || 5, lastServerPctRef.current || 5);
+
+        if (base >= cap) return base;
+
+        // Easing: faster early on, slower near cap
+        const remaining = cap - base;
+        const accel =
+          base < 30 ? 1.4 :
+          base < 60 ? 1.0 :
+          0.6;
+
+        const bump = Math.max(0.6, Math.min(2.2, remaining * 0.05 * accel));
+        const next = Math.min(cap, base + bump);
+        return Number(next.toFixed(2));
+      });
+    }, 700) as unknown as number;
+
+    // NOTE: do not auto-hide overlay on timeout; /index success will do that.
     timeoutRef.current = window.setTimeout(() => {
-      stopStatusPolling();
+      // Stop polling but keep showing overlay with informative text
+      if (pollRef.current) {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+      }
       setStatusText("Still working… finishing setup (first run can take a few minutes)");
-      // leave isIndexing = true; doIndex() will hide it when POST /index returns OK
-    }, 180_000) as unknown as number; // give a bit longer on first boot
+    }, 180_000) as unknown as number;
   }
   function stopStatusPolling() {
     if (pollRef.current) {
       clearInterval(pollRef.current);
       pollRef.current = null;
+    }
+    if (trickleRef.current) {
+      clearInterval(trickleRef.current);
+      trickleRef.current = null;
     }
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -303,6 +318,7 @@ export default function App() {
       // Only hide overlay when backend confirms success
       if (res && res.status === "ok") {
         // Snap to 100, brief "finalizing", then hide
+        capTo100Ref.current = true;
         setStatusText("Finalizing…");
         setStatusPct(100);
 
@@ -362,11 +378,41 @@ export default function App() {
 
   // selection from the toolbar button
   async function useFromPdf() {
-    const t = (await viewerRef.current?.getSelection?.()) || "";
-    const q = t.trim();
-    setSelection(t);
-    setSelectionSource("pdf");
-    if (q) await highlightSelection(q);
+    if (!selectedDoc) return;
+
+    setSelectLoading(true);
+    const token = Date.now();
+    (window as any).__selToken = token;
+
+    try {
+      const t = (await viewerRef.current?.getSelection?.()) || "";
+      const q = t.trim();
+
+      setSelection(t);
+      setSelectionSource("pdf");
+      setTab("related");
+
+      if (q) {
+        await highlightSelection(q);
+      }
+
+      // Fire both calls in parallel; pass selection (can be empty string)
+      const [r, i] = await Promise.all([
+        fetchRecommendations(selectedDoc, page + 2, 5, q),
+        fetchInsights(selectedDoc, page + 2, 5, q),
+      ]);
+
+      if ((window as any).__selToken !== token) return;
+
+      setRecs(r?.results || []);
+      setInsightText(i?.text || "");
+    } catch (e) {
+      console.error(e);
+    } finally {
+      if ((window as any).__selToken === token) {
+        setSelectLoading(false);
+      }
+    }
   }
 
   async function findRelatedFromSelection() {
@@ -583,10 +629,10 @@ export default function App() {
                 <button
                   className="px-3 h-9 rounded-lg text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 disabled:opacity-60"
                   onClick={useFromPdf}
-                  disabled={!selectedDoc}
+                  disabled={!selectedDoc || selectLoading}
                   title={selectedDoc ? "Grab selection from the PDF" : "Upload & choose a PDF first"}
                 >
-                  Use from PDF
+                  {selectLoading ? "Using…" : "Use from PDF"}
                 </button>
                 <button
                   className="px-3 h-9 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-60"
