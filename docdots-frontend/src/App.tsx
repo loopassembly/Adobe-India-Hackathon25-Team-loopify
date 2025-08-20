@@ -376,7 +376,9 @@ export default function App() {
     }
   }
 
-  // selection from the toolbar button
+  /*
+  // NOTE: "Use from PDF" temporarily disabled.
+  // Keeping the implementation here for future re-enable.
   async function useFromPdf() {
     if (!selectedDoc) return;
 
@@ -414,6 +416,7 @@ export default function App() {
       }
     }
   }
+  */
 
   async function findRelatedFromSelection() {
     const q = selection.trim();
@@ -626,14 +629,6 @@ export default function App() {
               <div className="hidden sm:block h-6 w-px bg-slate-200" />
 
               <div className="flex flex-wrap items-center gap-2">
-                <button
-                  className="px-3 h-9 rounded-lg text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 disabled:opacity-60"
-                  onClick={useFromPdf}
-                  disabled={!selectedDoc || selectLoading}
-                  title={selectedDoc ? "Grab selection from the PDF" : "Upload & choose a PDF first"}
-                >
-                  {selectLoading ? "Using…" : "Use from PDF"}
-                </button>
                 <button
                   className="px-3 h-9 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-60"
                   onClick={findRelatedFromSelection}
