@@ -18,7 +18,7 @@ export default function Welcome({ onUpload }: Props) {
 
   return (
     <div className="h-[72vh] rounded-2xl border border-slate-200 bg-white overflow-hidden grid md:grid-cols-2">
-      {/* Left: hero (unchanged visuals) */}
+      {/* Left: hero */}
       <div className="p-10 flex flex-col justify-center gap-6 bg-gradient-to-br from-indigo-50 to-white">
         <div className="inline-flex items-center gap-2">
           <div className="w-9 h-9 rounded-xl bg-indigo-600" />
@@ -30,12 +30,12 @@ export default function Welcome({ onUpload }: Props) {
           Read PDFs beautifully. Jump to related sections. Get insights. Make a podcast.
         </h1>
         <p className="text-slate-600">
-          This demo renders PDFs, builds an outline, finds related sections across docs,
-          summarizes insights, and can synthesize a short audio overview.
+          Drop your PDFs to build a private library on this device. Then pick a PDF to start reading, explore related sections,
+          and generate an audio overview.
         </p>
         <ul className="text-sm text-slate-600 list-disc pl-5">
           <li>Drop multiple PDFs or click to upload</li>
-          <li>We’ll index locally and never leave your machine</li>
+          <li>All processing stays on your machine</li>
           <li>Navigate with ← → keys once open</li>
         </ul>
       </div>
@@ -58,7 +58,7 @@ export default function Welcome({ onUpload }: Props) {
             <div className="font-semibold">Upload PDFs</div>
             <div className="text-sm text-slate-500">Drag & drop or click to choose files</div>
           </div>
-          <input type="file" multiple className="hidden" onChange={(e) => onUpload(e.target.files)} />
+          <input type="file" multiple accept="application/pdf" className="hidden" onChange={(e) => onUpload(e.target.files)} />
         </label>
       </div>
     </div>
