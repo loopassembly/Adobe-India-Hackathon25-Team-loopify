@@ -231,7 +231,7 @@ export default function Podcast({
   /* ---------------------------------- UI ---------------------------------- */
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-3">
+    <div className="w-full max-w-full overflow-x-auto rounded-2xl border border-slate-200 bg-white p-3">
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
@@ -241,7 +241,7 @@ export default function Podcast({
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           {displayAudioUrl && (
             <button
               onClick={clearCurrent}
@@ -263,7 +263,7 @@ export default function Podcast({
       </div>
 
       {/* Controls */}
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-5">
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-5 w-full">
         {/* Speakers */}
         <div className="sm:col-span-2">
           <div className="mb-1 flex items-center justify-between text-xs">
@@ -474,7 +474,7 @@ export default function Podcast({
                 {!transcriptCollapsed && (
                   <>
                     {viewMode === "bubbles" ? (
-                      <div className="mt-2 space-y-2">
+            <div className="mt-2 space-y-2">
                         {displayScript.map((turn, idx) => {
                           const isS1 = turn.speaker === "S1";
                           return (
@@ -483,7 +483,7 @@ export default function Podcast({
                               className={`flex ${isS1 ? "justify-start" : "justify-end"}`}
                             >
                               <div
-                                className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 py-2 border text-xs leading-relaxed ${
+                                className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 py-2 border text-xs leading-relaxed break-words ${
                                   isS1
                                     ? "bg-indigo-50 border-indigo-200 text-slate-900"
                                     : "bg-fuchsia-50 border-fuchsia-200 text-slate-900"
@@ -501,7 +501,7 @@ export default function Podcast({
                                     {isS1 ? "Speaker 1" : "Speaker 2"}
                                   </span>
                                 </div>
-                                <div>{turn.text}</div>
+                                <div className="break-words">{turn.text}</div>
                               </div>
                             </div>
                           );
@@ -525,7 +525,7 @@ export default function Podcast({
                                   {isS1 ? "S1" : "S2"}
                                 </span>
                               </div>
-                              <div className="leading-relaxed">{turn.text}</div>
+                              <div className="leading-relaxed break-words">{turn.text}</div>
                             </div>
                           );
                         })}
@@ -543,19 +543,19 @@ export default function Podcast({
       {history.length > 0 && (
         <div className="mt-5">
           <div className="text-xs font-semibold text-slate-700 mb-2">Previous podcasts</div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-full">
             {history.map((h) => (
               <button
                 key={h.id}
                 onClick={() => onLoadFromHistory?.(h.id)}
-                className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 px-3 py-2 text-left"
+                className="flex items-center justify-between gap-3 flex-wrap w-full rounded-lg border border-slate-200 bg-white hover:bg-slate-50 px-3 py-2 text-left"
                 title="Load this podcast"
               >
                 <div className="min-w-0">
-                  <div className="text-xs font-medium text-slate-900 truncate">
+                  <div className="text-xs font-medium text-slate-900 truncate break-all">
                     {h.title || "Audio overview"}
                   </div>
-                  <div className="text-[11px] text-slate-500">
+                  <div className="text-[11px] text-slate-500 break-all">
                     {(h.voices && h.voices.join(" • ")) || "2 speakers"} • {h.duration_min ?? 3} min
                     {h.created_at ? ` • ${new Date(h.created_at).toLocaleString()}` : ""}
                   </div>
